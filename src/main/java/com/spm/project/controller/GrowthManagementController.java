@@ -16,14 +16,12 @@ public class GrowthManagementController {
     @Autowired
     private GrowthManagementService growthManagementService;
 
-    @PutMapping("/products/{startDate}/{endDate}")
+    @GetMapping("/products/startDate/{startDate}/endDate/{endDate}")
     public List<ProductEvent> productsDeclined (
              @PathVariable Date startDate,
-             @PathVariable Date endDate,
-             @RequestParam(value = "launchDate") Date launchDate){
-
-
-        List<ProductEvent> products_declined = growthManagementService.productsDeclined(startDate,  endDate, launchDate);
+             @PathVariable Date endDate
+             ){
+        List<ProductEvent> products_declined = growthManagementService.productsDeclined(startDate, endDate,"declined    ");
         return products_declined;
     }
 }

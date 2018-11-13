@@ -14,8 +14,8 @@ public class GrowthManagementService {
     @Autowired
     private GrowthManagementRepository growthManagementRepository;
 
-    public List<ProductEvent> productsDeclined(Date StartDate, Date EndDate, Date LaunchDate){
-        return growthManagementRepository.getAllLaunchDateEqualsStartDateBeforeAndLaunchDateEqualsEndDateAfter(StartDate,EndDate,LaunchDate);
+    public List<ProductEvent> productsDeclined(Date StartDate, Date EndDate, String status){
+        return growthManagementRepository.findByProductStatusAndLaunchDateBetween(status, StartDate,EndDate);
     }
 
 }

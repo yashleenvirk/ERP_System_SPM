@@ -10,8 +10,7 @@ import java.sql.Date;
 import java.util.List;
 
 @Repository
-public interface GrowthManagementRepository extends CrudRepository<ProductEvent, Long> {
-    //@Query(value = "SELECT * FROM product where BETWEEN LaunchDate = ?1 AND LaunchDate = ?2", nativeQuery = true)
-    List<ProductEvent> getAllLaunchDateEqualsStartDateBeforeAndLaunchDateEqualsEndDateAfter(Date StartDate, Date EndDate, Date LaunchDate);
-    
+public interface GrowthManagementRepository extends CrudRepository<ProductEvent, Integer> {
+    //@Query(value = "SELECT * FROM product where productStatus = Declined AND LaunchDate BETWEEN 1999/01/01 AND 2000/01/01", nativeQuery = true)
+    List<ProductEvent> findByProductStatusAndLaunchDateBetween( String status, Date StartDate, Date EndDate);
 }
