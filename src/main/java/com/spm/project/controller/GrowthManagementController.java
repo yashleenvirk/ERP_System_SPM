@@ -24,4 +24,5 @@ public class GrowthManagementController {
         List<ProductEvent> products_declined = growthManagementService.productsDeclined(startDate, endDate,"declined    ");
         return products_declined;
     }
+
 }

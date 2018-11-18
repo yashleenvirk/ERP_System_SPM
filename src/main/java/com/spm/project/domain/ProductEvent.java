@@ -14,9 +14,10 @@ public class ProductEvent implements Serializable {
     @Column(name = "productName") private String productName;
     @Column(name = "launchDate") private Date launchDate;
     @Column(name = "productType") private String productType;
+    @Column(name = "marketingCost") private Double marketingCost;
+    @Column(name = "otherExpenses") private Double otherExpenses;
     @Column(name = "productClass") private String productClass;
     @Column(name = "productStatus") private String productStatus;
-    @Column(name = "sellingPrice") private Double sellingPrice;
     @Column(name = "manufacturingCost") private Double manufacturingCost;
 
     public int getProductID() {
@@ -67,12 +68,19 @@ public class ProductEvent implements Serializable {
         this.productStatus = productStatus;
     }
 
-    public Double getSellingPrice() {
-        return sellingPrice;
+    public Double getMarketingCost() {
+        return marketingCost;
+    }
+    public void setMarketingCost(Double marketingCost) {
+        this.marketingCost = marketingCost;
     }
 
-    public void setSellingPrice(Double sellingPrice) {
-        this.sellingPrice = sellingPrice;
+
+    public Double getOtherExpenses() {
+        return otherExpenses;
+    }
+    public void setOtherExpenses(Double otherExpenses) {
+        this.otherExpenses = otherExpenses;
     }
 
     public Double getManufacturingCost() {

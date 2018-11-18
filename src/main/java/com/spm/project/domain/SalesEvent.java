@@ -15,9 +15,8 @@ public class SalesEvent implements Serializable {
     @Column(name = "unitsSold") private int unitsSold;
     @Column(name = "month") private String month;
     @Column(name = "financialYear") private int financialYear;
-    @Column(name = "marketingCost") private Double marketingCost;
-    @Column(name = "otherExpenses") private Double otherExpenses;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Column(name = "sellingPrice") private Double sellingPrice;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "clientID") private ClientEvent client;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "productID") private ProductEvent product;
@@ -49,21 +48,6 @@ public class SalesEvent implements Serializable {
         this.financialYear = financialYear;
     }
 
-    public Double getMarketingCost() {
-        return marketingCost;
-    }
-    public void setMarketingCost(Double marketingCost) {
-        this.marketingCost = marketingCost;
-    }
-
-
-    public Double getOtherExpenses() {
-        return otherExpenses;
-    }
-    public void setOtherExpenses(Double otherExpenses) {
-        this.otherExpenses = otherExpenses;
-    }
-
     public ClientEvent getClient() {
         return client;
     }
@@ -78,6 +62,13 @@ public class SalesEvent implements Serializable {
 
     public void setProduct(ProductEvent product) {
         this.product = product;
+    }
+    public Double getSellingPrice() {
+        return sellingPrice;
+    }
+
+    public void setSellingPrice(Double sellingPrice) {
+        this.sellingPrice = sellingPrice;
     }
 }
 
