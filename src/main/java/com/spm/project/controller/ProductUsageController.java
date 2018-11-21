@@ -32,7 +32,7 @@ public class ProductUsageController {
     ) {
         return productUsageService.product_Usage(productID, month, year);
     }
-    @GetMapping("/sales/{month}/{year}/")
+    @GetMapping("/sales/{month}/{year}/totalProfit/")
     public double productTotalProfit(
             @PathVariable(value = "id") int productID,
             @PathVariable(value = "month") String month,
@@ -47,7 +47,7 @@ public class ProductUsageController {
             @PathVariable(value = "month") String month,
             @PathVariable(value = "year") int year
     ){
-        List<Integer> productIDs = productUsageService.allPIDbasedOnMonthYear(month, year);
+        List<Integer> productIDs = productUsageService.allPIDBasedOnMonthYear(month, year);
         double total_cost_productID = 0;
         for (Integer e: productIDs){
             total_cost_productID = total_cost_productID + growthManagementService.cost_total(e);
@@ -61,7 +61,7 @@ public class ProductUsageController {
             @PathVariable(value = "month") String month,
             @PathVariable(value = "year") int year
     ){
-        List<Integer> productIDs = productUsageService.allPIDbasedOnMonthYear(month, year);
+        List<Integer> productIDs = productUsageService.allPIDBasedOnMonthYear(month, year);
         double total_cost_productID = 0;
         for (Integer e: productIDs){
             total_cost_productID = total_cost_productID + growthManagementService.cost_total(e);

@@ -13,5 +13,5 @@ import java.util.List;
 public interface ProductUsageRepository extends CrudRepository<SalesEvent, Long> {
     List<SalesEvent> findBySalesIDAndMonthAndFinancialYear(int salesID, String month, int financialYear);
     List<SalesEvent> findByMonthAndFinancialYear(String month, int financialYear);
-    List<SalesEvent> findByClientID(int clientID);
+    List<SalesEvent> findByClient_ClientID(int clientID);
 }

@@ -16,8 +16,6 @@ public class ProductUsageService {
     @Autowired
     private ProductUsageRepository productUsageRepository;
 
-    @Autowired
-    private GrowthManagementService growthManagementService;
 
     public int product_Usage(int id, String month, int year) {
         List<SalesEvent> products_list = productUsageRepository.findBySalesIDAndMonthAndFinancialYear(id,month,year);
@@ -41,7 +39,7 @@ public class ProductUsageService {
         }
         return total;
     }
-    public List<Integer>  allPIDasedOnMonthYear(String month, int year){
+    public List<Integer>  allPIDBasedOnMonthYear(String month, int year){
         List<SalesEvent> product_list = productUsageRepository.findByMonthAndFinancialYear(month,year);
         List<Integer> data = new ArrayList<>();
         for (SalesEvent s:product_list
@@ -53,7 +51,7 @@ public class ProductUsageService {
     }
 
     public int leastActiveClient(int clientID){
-     List<SalesEvent> salesEvents = productUsageRepository.findByClientID(clientID);
+     List<SalesEvent> salesEvents = productUsageRepository.findByClient_ClientID(clientID);
      Map<Integer,Integer> productCount = new HashMap<Integer,Integer>();
      for (SalesEvent s:salesEvents) {
          if(productCount.containsKey(s.getProduct().getProductID())){
