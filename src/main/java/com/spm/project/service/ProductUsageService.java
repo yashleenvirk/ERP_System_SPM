@@ -50,7 +50,7 @@ public class ProductUsageService {
         return data;
     }
 
-    public int leastActiveClient(int clientID){
+    public int leastSoldProduct(int clientID){
      List<SalesEvent> salesEvents = productUsageRepository.findByClient_ClientID(clientID);
      Map<Integer,Integer> productCount = new HashMap<Integer,Integer>();
      for (SalesEvent s:salesEvents) {

@@ -11,5 +11,5 @@ import java.util.List;
 public interface PotentialClientRepository extends CrudRepository<ClientEvent, Long>{
 
     ClientEvent findByClientName(String clientName);
-    List<ClientEvent> findByClientSinceLessThan(Date clientSince);
+    List<ClientEvent> findByClientSinceGreaterThan(Date clientSince);
 }

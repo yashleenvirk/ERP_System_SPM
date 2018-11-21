@@ -25,7 +25,8 @@ public class PotentialClientController {
     public int leastSoldProduct(
             @PathVariable(value = "clientName") String clientName
     ){
-        int leastSoldProduct = potentialClientService.leastSoldProduct(clientName);
+        int clientID = potentialClientService.leastSoldProduct(clientName);
+        int leastSoldProduct = productUsageService.leastSoldProduct(clientID);
         return leastSoldProduct;
     }
 
