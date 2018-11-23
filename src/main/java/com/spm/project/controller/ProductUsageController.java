@@ -24,7 +24,7 @@ public class ProductUsageController {
     @Autowired
     GrowthManagementService growthManagementService;
 
-    @GetMapping("/sales/{month}/{year}/")
+    @GetMapping("/sales/{id}/{month}/{year}/")
     public int productUsage(
             @PathVariable(value = "id") int productID,
             @PathVariable(value = "month") String month,
@@ -32,13 +32,13 @@ public class ProductUsageController {
     ) {
         return productUsageService.product_Usage(productID, month, year);
     }
-    @GetMapping("/sales/{month}/{year}/totalProfit/")
+    @GetMapping("/sales/{id}/{month}/{year}/totalProfit/")
     public double productTotalProfit(
             @PathVariable(value = "id") int productID,
             @PathVariable(value = "month") String month,
             @PathVariable(value = "year") int year
     ) {
-       double total_profit =  productUsageService.productTotalProfit(productID,month,year);
+       double total_profit = productUsageService.productTotalProfit(productID,month,year);
         return total_profit;
     }
 
@@ -67,6 +67,8 @@ public class ProductUsageController {
             total_cost_productID = total_cost_productID + growthManagementService.cost_total(e);
         }
         double loss = total_cost_productID - productUsageService.sellingPricetotal(month, year);
+        if(loss < 0)
+            loss = 0;
         return loss;
     }
 
