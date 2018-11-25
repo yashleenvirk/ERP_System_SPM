@@ -12,6 +12,7 @@ import java.io.IOException;
 @RequestMapping("/stock")
 public class StockController {
 
+
     @Autowired
     private StockService stockService;
 

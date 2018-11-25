@@ -12,6 +12,7 @@ import java.net.URLConnection;
 public class StockService {
 
     public String getStockPrice() throws IOException{
+
         URL url = new URL("https://www.worldtradingdata.com/api/v1/stock?symbol=AAPL,MSFT,HSBA.L&api_token=3A1z889eUXeT0s4VofpHhQE7xjamzypKJbOK3GCH7smex6kDw0N6SsaIgbp1");
         URLConnection urlconn = url.openConnection();
         InputStreamReader inStream = new InputStreamReader(urlconn.getInputStream());
