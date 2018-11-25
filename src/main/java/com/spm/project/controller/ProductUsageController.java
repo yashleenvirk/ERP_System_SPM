@@ -24,7 +24,7 @@ public class ProductUsageController {
     @Autowired
     GrowthManagementService growthManagementService;
 
-    @GetMapping("/sales/{month}/{year}/")
+    @GetMapping("/sales/{id}/{month}/{year}/")
     public int productUsage(
             @PathVariable(value = "id") int productID,
             @PathVariable(value = "month") String month,
@@ -32,13 +32,13 @@ public class ProductUsageController {
     ) {
         return productUsageService.product_Usage(productID, month, year);
     }
-    @GetMapping("/sales/{month}/{year}/")
+    @GetMapping("/sales/{id}/{month}/{year}/totalProfit/")
     public double productTotalProfit(
             @PathVariable(value = "id") int productID,
             @PathVariable(value = "month") String month,
             @PathVariable(value = "year") int year
     ) {
-       double total_profit =  productUsageService.productTotalProfit(productID,month,year);
+       double total_profit = productUsageService.productTotalProfit(productID,month,year);
         return total_profit;
     }
 
@@ -47,7 +47,7 @@ public class ProductUsageController {
             @PathVariable(value = "month") String month,
             @PathVariable(value = "year") int year
     ){
-        List<Integer> productIDs = productUsageService.allPIDbasedOnMonthYear(month, year);
+        List<Integer> productIDs = productUsageService.allPIDBasedOnMonthYear(month, year);
         double total_cost_productID = 0;
         for (Integer e: productIDs){
             total_cost_productID = total_cost_productID + growthManagementService.cost_total(e);
@@ -61,12 +61,14 @@ public class ProductUsageController {
             @PathVariable(value = "month") String month,
             @PathVariable(value = "year") int year
     ){
-        List<Integer> productIDs = productUsageService.allPIDbasedOnMonthYear(month, year);
+        List<Integer> productIDs = productUsageService.allPIDBasedOnMonthYear(month, year);
         double total_cost_productID = 0;
         for (Integer e: productIDs){
             total_cost_productID = total_cost_productID + growthManagementService.cost_total(e);
         }
         double loss = total_cost_productID - productUsageService.sellingPricetotal(month, year);
+        if(loss < 0)
+            loss = 0;
         return loss;
     }
 

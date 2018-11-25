@@ -22,7 +22,7 @@ public class PotentialClientService {
     }
 
     public String leastActiveClient(Date ClientSince){
-        List<ClientEvent> client_list = potentialClientRepository.findByClientSinceLesserThan(ClientSince);
+        List<ClientEvent> client_list = potentialClientRepository.findByClientSinceGreaterThan(ClientSince);
         int min = 999999999;
         String leastActiveClient = "";
         for (ClientEvent c:client_list) {

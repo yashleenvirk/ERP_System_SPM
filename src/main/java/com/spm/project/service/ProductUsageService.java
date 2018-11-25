@@ -16,44 +16,47 @@ public class ProductUsageService {
     @Autowired
     private ProductUsageRepository productUsageRepository;
 
-    @Autowired
-    private GrowthManagementService growthManagementService;
 
     public int product_Usage(int id, String month, int year) {
-        List<SalesEvent> products_list = productUsageRepository.findBySalesIDAndMonthAndFinancialYear(id,month,year);
-        return products_list.size();
+        List<SalesEvent> products_list = productUsageRepository.findByProduct_ProductIDAndMonthAndFinancialYear(id,month,year);
+        return (products_list.size()+1);
     }
 
 
     public double productTotalProfit (int id, String month, int year) {
-        List<SalesEvent> products_list = productUsageRepository.findBySalesIDAndMonthAndFinancialYear(id,month,year);
-        SalesEvent salesEvent = products_list.get(0);
-        int units_sold = salesEvent.getUnitsSold();
-        double selling_Price = salesEvent.getSellingPrice();
-        return units_sold*selling_Price;
+        List<SalesEvent> products_list = productUsageRepository.findByProduct_ProductIDAndMonthAndFinancialYear(id,month,year);
+        double total = 0;
+        for(int i = 0; i < products_list.size(); i++){
+            SalesEvent s = products_list.get(i);
+            int units_sold = s.getUnitsSold();
+            double selling_price = s.getSellingPrice();
+            double price = units_sold*selling_price;
+            total = total + price;
+        }
+        return total;
+
     }
 
     public double sellingPricetotal (String month, int year){
         List<SalesEvent> products_list = productUsageRepository.findByMonthAndFinancialYear(month,year);
         double total = 0;
         for (SalesEvent s: products_list) {
-            total = total + s.getUnitsSold()*s.getUnitsSold();
+            total = total + s.getUnitsSold()*s.getSellingPrice();
         }
         return total;
     }
-    public List<Integer>  allPIDasedOnMonthYear(String month, int year){
+    public List<Integer>  allPIDBasedOnMonthYear(String month, int year){
         List<SalesEvent> product_list = productUsageRepository.findByMonthAndFinancialYear(month,year);
         List<Integer> data = new ArrayList<>();
-        for (SalesEvent s:product_list
-             ) {
+        for (SalesEvent s:product_list) {
                 Integer e = s.getProduct().getProductID();
                 data.add(e);
         }
         return data;
     }
 
-    public int leastActiveClient(int clientID){
-     List<SalesEvent> salesEvents = productUsageRepository.findByClientID(clientID);
+    public int leastSoldProduct(int clientID){
+     List<SalesEvent> salesEvents = productUsageRepository.findByClient_ClientID(clientID);
      Map<Integer,Integer> productCount = new HashMap<Integer,Integer>();
      for (SalesEvent s:salesEvents) {
          if(productCount.containsKey(s.getProduct().getProductID())){

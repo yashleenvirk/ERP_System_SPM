@@ -21,16 +21,16 @@ public class PotentialClientController {
     @Autowired
     ProductUsageService productUsageService;
 
-    @GetMapping("/client/{clientName}/")
+    @GetMapping("/client/leastSoldProduct/{clientName}/")
     public int leastSoldProduct(
             @PathVariable(value = "clientName") String clientName
     ){
         int clientID = potentialClientService.leastSoldProduct(clientName);
-        int leastSoldProduct = productUsageService.leastActiveClient(clientID);
+        int leastSoldProduct = productUsageService.leastSoldProduct(clientID);
         return leastSoldProduct;
     }
 
-    @GetMapping("/client/{clientSince}/")
+    @GetMapping("/clientSince/{clientSince}/")
     public String leastActiveClient(
             @PathVariable(value = "clientSince") Date clientSince
     ){
